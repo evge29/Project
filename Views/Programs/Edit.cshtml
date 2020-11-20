@@ -1,0 +1,64 @@
+﻿@model Project.ViewModels.ProgramClientVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Programs</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Program.Id" />
+            <div class="form-group">
+                <label asp-for="Program.Name" class="control-label"></label>
+                <input asp-for="Program.Name" class="form-control" />
+                <span asp-validation-for="Program.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Program.Payment" class="control-label"></label>
+                <input asp-for="Program.Payment" class="form-control" />
+                <span asp-validation-for="Program.Payment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Program.Duration" class="control-label"></label>
+                <input asp-for="Program.Duration" class="form-control" />
+                <span asp-validation-for="Program.Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Program.CoachId" class="control-label"></label>
+                <select asp-for="Program.CoachId" class="form-control" asp-items="ViewBag.Id">
+                    <option value="">Select</option>
+                </select>
+                <span asp-validation-for="Program.CoachId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Clients</label>
+                <select asp-for="SelectedClients" class="form-control js-example-basic-multiple"
+                        asp-items="Model.ClientsList"> </select>
+                <span asp-validation-for="SelectedClients" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+$(document).ready(function () {
+$("#SelectedClients").select2();
+});
+    </script>
+}
